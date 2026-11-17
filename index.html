@@ -8,29 +8,19 @@
     <!-- Icons & Apple Meta -->
     <link rel="icon" href="https://i.postimg.cc/L4QfTBwP/download.jpg" type="image/jpeg">
     <link rel="apple-touch-icon" href="https://i.postimg.cc/L4QfTBwP/download.jpg">
-    <link rel="apple-touch-icon" sizes="152x152" href="https://i.postimg.cc/L4QfTBwP/download.jpg">
-    <link rel="apple-touch-icon" sizes="180x180" href="https://i.postimg.cc/L4QfTBwP/download.jpg">
-    <link rel="apple-touch-icon" sizes="167x167" href="https://i.postimg.cc/L4QfTBwP/download.jpg">
-
-    <!-- إعدادات إختصار آيفون والـ iOS Home Screen -->
     <meta name="apple-mobile-web-app-title" content="YE-Acc">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="application-name" content="Items Cost">
     <meta name="theme-color" content="#05668D">
 
-    <!-- Preconnect improves first-request latency on mobile networks. -->
-    <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://firestore.googleapis.com" crossorigin>
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <!-- CSS External Libraries -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
-    <!-- Firebase compat SDKs are deferred -->
-    <script defer src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-    <script defer src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <!-- Firebase compat SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
 
     <style>
         :root {
@@ -39,199 +29,37 @@
             --secondary-color: #424242;
             --bg-light: #f8f9fa;
         }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f6f9;
-            color: #333;
-            padding-bottom: 80px;
-        }
-
-        input[type=number]::-webkit-inner-spin-button, 
-        input[type=number]::-webkit-outer-spin-button { 
-            -webkit-appearance: none; 
-            margin: 0; 
-        }
-        input[type=number] {
-            -moz-appearance: textfield;
-        }
-
-        .num-right, table td.num-right, table th.num-right {
-            text-align: right !important;
-            direction: ltr;
-            font-variant-numeric: tabular-nums;
-        }
-        .amount-input { text-align:right !important; direction:ltr !important; font-variant-numeric:tabular-nums; }
-
-        .table-dark, .table-dark-orange {
-            background-color: var(--header-orange) !important;
-            color: #ffffff !important;
-        }
-        .table-dark th, .table-dark-orange th {
-            background-color: var(--header-orange) !important;
-            color: #ffffff !important;
-            border-color: #b04800 !important;
-        }
-
-        .table-compact th, .table-compact td {
-            padding: 6px 8px !important;
-            font-size: 0.85rem;
-            vertical-align: middle;
-        }
-
-        .navbar-custom {
-            background-color: var(--primary-color);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-            position: sticky;
-            top: 0;
-            z-index: 1030;
-        }
-        .navbar-brand {
-            font-weight: 700;
-            color: #fff !important;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .navbar-brand img {
-            width: 38px;
-            height: 38px;
-            border-radius: 8px;
-            object-fit: cover;
-        }
-
-        .nav-pills .nav-link {
-            color: #495057;
-            font-weight: 600;
-            border-radius: 8px;
-            margin-bottom: 3px;
-            padding: 8px 12px;
-            transition: all 0.2s ease;
-        }
-        .nav-pills .nav-link.active, .nav-pills .nav-link:hover {
-            background-color: var(--primary-color);
-            color: #fff;
-        }
-
-        .floating-card {
-            background: #fff;
-            border-radius: 12px;
-            padding: 15px;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-            animation: floatCard 4s ease-in-out infinite;
-            border-right: 5px solid var(--primary-color);
-            margin-bottom: 15px;
-        }
-        .floating-card:nth-child(2) { animation-delay: 1s; border-right-color: #28a745; }
-        .floating-card:nth-child(3) { animation-delay: 2s; border-right-color: #dc3545; }
-        .floating-card:nth-child(4) { animation-delay: 3s; border-right-color: #ffc107; }
-
-        @keyframes floatCard {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-6px); }
-            100% { transform: translateY(0px); }
-        }
-
-        .account-link {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 600;
-            cursor: pointer;
-        }
-        .account-link:hover {
-            text-decoration: underline;
-            color: #034865;
-        }
-
-        .report-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid var(--header-orange);
-            padding-bottom: 8px;
-            margin-bottom: 12px;
-        }
-        .report-header img {
-            width: 65px;
-            height: 65px;
-            border-radius: 6px;
-            object-fit: cover;
-        }
-
-        .bs-formal-container {
-            background: #ffffff;
-            padding: 25px;
-            border-radius: 8px;
-            border: 1px solid #dee2e6;
-            color: #000;
-        }
-
-        .signature-card {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background: #ffffff;
-            color: #0000FF !important;
-            padding: 8px 13px;
-            border-radius: 6px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-            font-size: 0.65rem;
-            font-weight: 600;
-            z-index: 1000;
-            cursor: pointer;
-            border: 2px solid #FF0000;
-            text-decoration: none;
-            display: inline-block;
-        }
-        .signature-card:hover { transform: scale(1.05); }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f6f9; color: #333; padding-bottom: 80px; }
+        .num-right, table td.num-right, table th.num-right { text-align: right !important; direction: ltr; font-variant-numeric: tabular-nums; }
+        .amount-input { text-align: right !important; direction: ltr !important; font-variant-numeric: tabular-nums; }
+        .table-dark-orange { background-color: var(--header-orange) !important; color: #ffffff !important; }
+        .table-compact th, .table-compact td { padding: 6px 8px !important; font-size: 0.85rem; vertical-align: middle; }
+        .navbar-custom { background-color: var(--primary-color); box-shadow: 0 4px 10px rgba(0,0,0,0.15); position: sticky; top: 0; z-index: 1030; }
+        .navbar-brand { font-weight: 700; color: #fff !important; display: flex; align-items: center; gap: 10px; }
+        .navbar-brand img { width: 38px; height: 38px; border-radius: 8px; object-fit: cover; }
+        .nav-pills .nav-link { color: #495057; font-weight: 600; border-radius: 8px; margin-bottom: 3px; padding: 8px 12px; transition: all 0.2s ease; }
+        .nav-pills .nav-link.active, .nav-pills .nav-link:hover { background-color: var(--primary-color); color: #fff; }
+        .floating-card { background: #fff; border-radius: 12px; padding: 15px; box-shadow: 0 6px 18px rgba(0,0,0,0.06); border-right: 5px solid var(--primary-color); margin-bottom: 15px; }
+        .signature-card { position: fixed; bottom: 20px; left: 20px; background: #ffffff; color: #0000FF !important; padding: 8px 13px; border-radius: 6px; box-shadow: 0 6px 20px rgba(0,0,0,0.15); font-size: 0.65rem; font-weight: 600; z-index: 1000; cursor: pointer; border: 2px solid #FF0000; text-decoration: none; display: inline-block; }
         .signature-card .name { font-size: 0.75rem; font-weight: 700; color: #0000FF; }
         .signature-card .title { font-size: 0.58rem; color: #0000FF; }
-
-        .backup-toast {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1055;
-            min-width: 320px;
-            max-width: 95vw;
-        }
-
-        .login-screen { position:fixed; inset:0; width:100%; height:100vh; height:100dvh; min-height:100%; z-index:3000; background:linear-gradient(135deg,#05668D,#034865); display:flex; align-items:center; justify-content:center; padding:max(16px,env(safe-area-inset-top)) 16px max(16px,env(safe-area-inset-bottom)); overflow-y:auto; }
-        .login-card { width:min(420px,100%); background:#fff; border-radius:18px; padding:28px; box-shadow:0 20px 60px rgba(0,0,0,.25); margin:auto; }
-        .login-card .form-control { min-height:46px; font-size:16px; }
-        .login-card .btn { min-height:46px; font-size:1rem; }
-        .doc-number-link { color:#075985; font-weight:700; text-decoration:underline; cursor:pointer; white-space:nowrap; }
-        .doc-number-link:hover { color:#c75200; }
+        .login-screen { position: fixed; inset: 0; width: 100%; height: 100vh; z-index: 3000; background: linear-gradient(135deg,#05668D,#034865); display: flex; align-items: center; justify-content: center; padding: 16px; overflow-y: auto; }
+        .login-card { width: min(420px, 100%); background: #fff; border-radius: 18px; padding: 28px; box-shadow: 0 20px 60px rgba(0,0,0,.25); margin: auto; }
         .firebase-status-badge { font-size: 0.75rem; padding: 4px 10px; border-radius: 12px; display: inline-flex; align-items: center; gap: 6px; }
         input[type="date"] { direction: ltr; text-align: right; }
-
         .mobile-bottom-nav { display: none; }
         @media (max-width: 768px) {
             body { padding-bottom: 85px !important; }
-            .mobile-bottom-nav {
-                display: flex; position: fixed; bottom: 0; left: 0; right: 0; height: 64px;
-                background: #ffffff; border-top: 2px solid var(--primary-color); box-shadow: 0 -4px 12px rgba(0,0,0,0.12);
-                z-index: 1045; justify-content: space-around; align-items: center; padding: 4px 2px;
-            }
-            .mobile-bottom-nav .mob-nav-btn {
-                flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
-                background: none; border: none; color: #495057; font-size: 0.68rem; font-weight: 600; padding: 4px 2px; text-decoration: none;
-            }
-            .mobile-bottom-nav .mob-nav-btn i { font-size: 1.15rem; margin-bottom: 3px; }
+            .mobile-bottom-nav { display: flex; position: fixed; bottom: 0; left: 0; right: 0; height: 64px; background: #ffffff; border-top: 2px solid var(--primary-color); z-index: 1045; justify-content: space-around; align-items: center; padding: 4px 2px; }
+            .mobile-bottom-nav .mob-nav-btn { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; background: none; border: none; color: #495057; font-size: 0.68rem; font-weight: 600; text-decoration: none; }
             .mobile-bottom-nav .mob-nav-btn.active { color: var(--primary-color); font-weight: 700; }
         }
-
-        @media print {
-            .signature-card, .no-print { display: none !important; }
-            body { background: #fff !important; padding: 0 !important; }
-        }
-
-        .nav-group { margin: 4px 0 7px; list-style:none; }
-        .nav-group-toggle { display:flex; align-items:center; justify-content:space-between; width:100%; border:0; border-radius:8px; background:#f1f4f7; color:#334155; padding:8px 10px; font-size:.84rem; font-weight:700; text-align:right; }
-        .nav-group:not(.is-open) .nav-submenu { display:none; }
-        .nav-submenu { list-style:none; padding:5px 5px 0 0; margin:0; }
-        .nav-submenu .nav-link { font-size:.82rem; padding:6px 9px; margin-bottom:2px; }
+        @media print { .signature-card, .no-print { display: none !important; } }
+        .nav-group { margin: 4px 0 7px; list-style: none; }
+        .nav-group-toggle { display: flex; align-items: center; justify-content: space-between; width: 100%; border: 0; border-radius: 8px; background: #f1f4f7; color: #334155; padding: 8px 10px; font-size: .84rem; font-weight: 700; text-align: right; }
+        .nav-group:not(.is-open) .nav-submenu { display: none; }
+        .nav-submenu { list-style: none; padding: 5px 5px 0 0; margin: 0; }
+        .nav-submenu .nav-link { font-size: .82rem; padding: 6px 9px; margin-bottom: 2px; }
     </style>
 </head>
 <body>
@@ -241,12 +69,11 @@
             <img src="https://i.postimg.cc/L4QfTBwP/download.jpg" style="width:82px;height:82px;object-fit:cover;border-radius:14px" alt="Logo">
             <h4 class="mt-3 mb-1">Yasser Elkhateeb</h4>
             <p class="text-muted small mb-4">تسجيل الدخول إلى النظام المحاسبي المتزامن</p>
-            <div class="text-start mb-3"><label class="form-label">اسم المستخدم</label><input id="loginUsername" class="form-control" autocomplete="username" placeholder="اسم المستخدم"></div>
-            <div class="text-start mb-3"><label class="form-label">كلمة المرور</label><input id="loginPassword" type="password" class="form-control" autocomplete="current-password" placeholder="كلمة المرور" onkeydown="if(event.key==='Enter')login()"></div>
+            <div class="text-start mb-3"><label class="form-label">اسم المستخدم</label><input id="loginUsername" class="form-control" autocomplete="username" placeholder="اسم المستخدم" value="admin"></div>
+            <div class="text-start mb-3"><label class="form-label">كلمة المرور</label><input id="loginPassword" type="password" class="form-control" autocomplete="current-password" placeholder="كلمة المرور" value="123456" onkeydown="if(event.key==='Enter')login()"></div>
             <div id="loginConnectionStatus" class="small text-muted mb-2" role="status" aria-live="polite">جارٍ الاتصال الآمن وتحميل بيانات النظام...</div>
             <div id="loginError" class="text-danger small mb-2" aria-live="polite"></div>
             <button id="loginButton" class="btn btn-primary w-100" onclick="login()" disabled>دخول</button>
-            <button id="retryCloudButton" type="button" class="btn btn-outline-secondary btn-sm w-100 mt-2" style="display:none" onclick="retryFirebaseConnection()">إعادة الاتصال بالخادم</button>
         </div>
     </div>
 
@@ -266,540 +93,53 @@
                 <i class="fas fa-sync fa-spin"></i> <span class="d-none d-sm-inline">جاري الاتصال...</span>
             </span>
             <span id="currentUserLabel" class="text-white small d-none d-lg-inline me-2"></span>
-            <button class="btn btn-sm btn-outline-light" onclick="changeOwnPasswordPrompt()" title="تغيير كلمة المرور"><i class="fas fa-key"></i><span class="d-none d-md-inline ms-1">كلمة المرور</span></button>
             <button class="btn btn-sm btn-outline-light" onclick="logout()" title="خروج"><i class="fas fa-sign-out-alt"></i><span class="d-none d-md-inline ms-1">خروج</span></button>
-            <button class="btn btn-sm btn-outline-light d-none d-md-inline-block" onclick="showSection('settings')"><i class="fas fa-cog me-1"></i> الإعدادات</button>
         </div>
     </nav>
-
-    <!-- Mobile Drawer Sidebar -->
-    <div class="offcanvas offcanvas-start no-print" tabindex="-1" id="mobileSidebar" aria-labelledby="mobileSidebarLabel">
-        <div class="offcanvas-header bg-primary text-white">
-            <h5 class="offcanvas-title fs-6" id="mobileSidebarLabel">
-                <img src="https://i.postimg.cc/L4QfTBwP/download.jpg" style="width:28px;height:28px;border-radius:6px;" class="me-2">
-                Yasser Elkhateeb - القائمة
-            </h5>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body p-2">
-            <ul class="nav nav-pills flex-column" id="mobileNavList"></ul>
-        </div>
-    </div>
-
-    <!-- Backup Reminder Alert -->
-    <div id="backupAlert" class="alert alert-warning alert-dismissible fade show backup-toast d-none shadow-lg" role="alert">
-        <div class="d-flex align-items-center">
-            <i class="fas fa-exclamation-triangle fa-2x me-3"></i>
-            <div>
-                <strong>تنبيه النسخ الاحتياطي!</strong><br>
-                يرجى أخذ نسخة احتياطية لحفظ البيانات وحمايتها من التلف.
-            </div>
-        </div>
-        <div class="mt-2 text-end">
-            <button class="btn btn-sm btn-success me-2" onclick="exportBackup()"><i class="fas fa-download me-1"></i> تحميل نسخة الآن</button>
-            <button type="button" class="btn btn-sm btn-secondary" onclick="dismissBackupAlert()">تجاهل</button>
-        </div>
-    </div>
 
     <!-- Main Container -->
     <div class="container-fluid mt-3">
         <div class="row">
-            <!-- Desktop Sidebar Navigation -->
+            <!-- Sidebar Navigation -->
             <div class="col-md-2 d-none d-md-block no-print mb-3">
                 <div class="bg-white p-2 rounded shadow-sm">
                     <ul class="nav nav-pills flex-column" id="mainNav">
-                        <li class="nav-item nav-dashboard"><a class="nav-link active" href="#" onclick="showSection('dashboard');return false;"><i class="fas fa-chart-pie me-2"></i> لوحة التحكم</a></li>
-                        <li class="nav-group is-open">
-                            <button type="button" class="nav-group-toggle" onclick="toggleNavGroup(this)"><span><i class="fas fa-bolt me-2"></i> العمليات اليومية</span><i class="fas fa-chevron-down group-chevron"></i></button>
-                            <ul class="nav-submenu">
-                                <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('journalEntries');return false;"><i class="fas fa-book me-2"></i> القيود اليومية</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('receiptVouchers');return false;"><i class="fas fa-file-invoice-dollar me-2"></i> سندات القبض</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('paymentVouchers');return false;"><i class="fas fa-receipt me-2"></i> سندات الصرف</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('fixedAssets');return false;"><i class="fas fa-industry me-2"></i> الأصول الثابتة</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-group">
-                            <button type="button" class="nav-group-toggle" onclick="toggleNavGroup(this)"><span><i class="fas fa-chart-line me-2"></i> التقارير المالية</span><i class="fas fa-chevron-down group-chevron"></i></button>
-                            <ul class="nav-submenu">
-                                <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('accountStatement');return false;">كشف حساب</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('trialBalanceMovement');return false;">ميزان المراجعة بالحركة</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('trialBalanceBalance');return false;">ميزان المراجعة بالرصيد</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('tradingAccount');return false;">حساب المتاجرة</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('incomeStatement');return false;">قائمة الدخل</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('balanceSheet');return false;">الميزانية العمومية</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('cashFlow');return false;">قائمة التدفقات النقدية</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('aging');return false;">أعمار الديون</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('bankReconciliation');return false;">تسوية البنوك</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('comparative');return false;">تقارير المقارنة</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-group">
-                            <button type="button" class="nav-group-toggle" onclick="toggleNavGroup(this)"><span><i class="fas fa-sitemap me-2"></i> الحسابات ومراكز التكلفة</span><i class="fas fa-chevron-down group-chevron"></i></button>
-                            <ul class="nav-submenu">
-                                <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('chartOfAccounts');return false;">دليل الحسابات</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('costCenters');return false;">مراكز التكلفة</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-group">
-                            <button type="button" class="nav-group-toggle" onclick="toggleNavGroup(this)"><span><i class="fas fa-gear me-2"></i> الإدارة والإعدادات</span><i class="fas fa-chevron-down group-chevron"></i></button>
-                            <ul class="nav-submenu">
-                                <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('settings');return false;">الإعدادات والنسخ الاحتياطي</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('auditLog');return false;">سجل العمليات</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('users');return false;">المستخدمون والصلاحيات</a></li>
-                            </ul>
-                        </li>
+                        <li class="nav-item"><a class="nav-link active" href="#" onclick="showSection('dashboard');return false;"><i class="fas fa-chart-pie me-2"></i> لوحة التحكم</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('journalEntries');return false;"><i class="fas fa-book me-2"></i> القيود اليومية</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('chartOfAccounts');return false;"><i class="fas fa-sitemap me-2"></i> دليل الحسابات</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('settings');return false;"><i class="fas fa-gear me-2"></i> الإعدادات</a></li>
                     </ul>
                 </div>
             </div>
 
             <!-- Content Area -->
             <div class="col-md-10 col-12">
-                <!-- Dashboard Section -->
                 <div id="dashboardSection" class="content-section">
-                    <h4 class="mb-3 text-secondary"><i class="fas fa-tachometer-alt me-2"></i> لوحة التحكم والإحصائيات</h4>
+                    <h4 class="mb-3 text-secondary"><i class="fas fa-tachometer-alt me-2"></i> لوحة التحكم</h4>
                     <div class="row">
-                        <div class="col-md-3 col-6">
+                        <div class="col-md-4">
                             <div class="floating-card">
-                                <div class="text-muted small">إجمالي المقبوضات (الشهر الحالي)</div>
-                                <h3 class="mt-2 text-success num-right" id="dashTotalReceipts">0.000</h3>
-                                <div class="small text-muted"><i class="fas fa-arrow-up text-success"></i> مقبوضات سندات القبض</div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-6">
-                            <div class="floating-card">
-                                <div class="text-muted small">إجمالي المدفوعات (الشهر الحالي)</div>
-                                <h3 class="mt-2 text-danger num-right" id="dashTotalPayments">0.000</h3>
-                                <div class="small text-muted"><i class="fas fa-arrow-down text-danger"></i> مدفوعات سندات الصرف</div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-6">
-                            <div class="floating-card">
-                                <div class="text-muted small">عدد القيود المسجلة</div>
+                                <div class="text-muted small">إجمالي القيود</div>
                                 <h3 class="mt-2 text-primary" id="dashTotalEntries">0</h3>
-                                <div class="small text-muted"><i class="fas fa-file-alt"></i> قيود يومية وسندات</div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-6">
-                            <div class="floating-card">
-                                <div class="text-muted small">إجمالي الحسابات بالحركة</div>
-                                <h3 class="mt-2 text-warning" id="dashActiveAccounts">0</h3>
-                                <div class="small text-muted"><i class="fas fa-users"></i> حسابات تحتوي على تعاملات</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card mt-3 border-0 shadow-sm">
-                        <div class="card-header bg-white font-weight-bold">آخر العمليات المسجلة</div>
-                        <div class="card-body p-0">
-                            <div class="table-responsive">
-                                <table class="table table-hover table-compact mb-0 text-center">
-                                    <thead class="table-dark-orange">
-                                        <tr>
-                                            <th>الرقم</th>
-                                            <th>التاريخ</th>
-                                            <th>النوع</th>
-                                            <th>البيان / الشرح</th>
-                                            <th class="num-right">المبلغ الإجمالي</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="dashRecentTransactions"></tbody>
-                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Chart of Accounts Section -->
-                <div id="chartOfAccountsSection" class="content-section d-none">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4><i class="fas fa-sitemap me-2"></i> دليل / شجرة الحسابات</h4>
-                        <div class="d-flex gap-2 flex-wrap"><button class="btn btn-sm btn-outline-primary" onclick="createAccountGroup()"><i class="fas fa-folder-plus me-1"></i> إضافة مجموعة رئيسية</button><button class="btn btn-sm btn-primary" onclick="openAccountModal()"><i class="fas fa-plus me-1"></i> إضافة حساب جديد</button></div>
-                    </div>
-                    <div class="card border-0 shadow-sm">
-                        <div class="card-body p-2">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped table-compact text-center mb-0">
-                                    <thead class="table-dark-orange">
-                                        <tr>
-                                            <th>رمز الحساب</th>
-                                            <th>اسم الحساب</th>
-                                            <th>النوع الرئيسي</th>
-                                            <th>التقرير التابع له</th>
-                                            <th>الإجراءات</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="accountsTableBody"></tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Journal Entries Section -->
                 <div id="journalEntriesSection" class="content-section d-none">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4><i class="fas fa-book me-2"></i> إدارة القيود اليومية</h4>
-                        <button class="btn btn-sm btn-primary" onclick="openEntryModal()"><i class="fas fa-plus me-1"></i> إضافة قيد يومية جديد</button>
-                    </div>
-                    <div class="filter-panel no-print"><div class="row g-2 align-items-end"><div class="col-md-5"><label>بحث في رقم القيد أو البيان أو المبلغ</label><input id="journalSearch" class="form-control form-control-sm" oninput="renderEntriesTable()" placeholder="اكتب جزءاً من البيان أو المبلغ..."></div><div class="col-md-3 col-6"><label>من تاريخ</label><input id="journalStart" type="date" class="form-control form-control-sm" onchange="renderEntriesTable()"></div><div class="col-md-3 col-6"><label>إلى تاريخ</label><input id="journalEnd" type="date" class="form-control form-control-sm" onchange="renderEntriesTable()"></div><div class="col-md-1"><button class="btn btn-sm btn-outline-secondary w-100" onclick="clearListFilter('journal')">مسح</button></div></div></div>
-                    <div class="card border-0 shadow-sm">
-                        <div class="card-body p-2">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-hover table-compact text-center mb-0">
-                                    <thead class="table-dark-orange">
-                                        <tr>
-                                            <th>رقم القيد</th>
-                                            <th>التاريخ</th>
-                                            <th>البيان / الشرح</th>
-                                            <th class="num-right">إجمالي المدين</th>
-                                            <th class="num-right">إجمالي الدائن</th>
-                                            <th>الإجراءات</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="journalEntriesTableBody"></tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+                    <h4>القيود اليومية</h4>
                 </div>
 
-                <!-- Receipt Vouchers Section -->
-                <div id="receiptVouchersSection" class="content-section d-none">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4><i class="fas fa-file-invoice-dollar me-2"></i> سندات القبض</h4>
-                        <button class="btn btn-sm btn-success" onclick="openVoucherModal('receipt')"><i class="fas fa-plus me-1"></i> إنشاء سند قبض جديد</button>
-                    </div>
-                    <div class="filter-panel no-print"><div class="row g-2 align-items-end"><div class="col-md-5"><label>بحث في رقم السند أو الجهة أو البيان أو المبلغ</label><input id="receiptSearch" class="form-control form-control-sm" oninput="renderVouchersTables()"></div><div class="col-md-3 col-6"><label>من تاريخ</label><input id="receiptStart" type="date" class="form-control form-control-sm" onchange="renderVouchersTables()"></div><div class="col-md-3 col-6"><label>إلى تاريخ</label><input id="receiptEnd" type="date" class="form-control form-control-sm" onchange="renderVouchersTables()"></div><div class="col-md-1"><button class="btn btn-sm btn-outline-secondary w-100" onclick="clearListFilter('receipt')">مسح</button></div></div></div>
-                    <div class="card border-0 shadow-sm">
-                        <div class="card-body p-2">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-compact text-center mb-0">
-                                    <thead class="table-dark-orange">
-                                        <tr>
-                                            <th>رقم السند</th>
-                                            <th>التاريخ</th>
-                                            <th>استلمنا من</th>
-                                            <th>حساب الصندوق / البنك</th>
-                                            <th class="num-right">المبلغ</th>
-                                            <th>الإجراءات</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="receiptVouchersTableBody"></tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+                <div id="chartOfAccountsSection" class="content-section d-none">
+                    <h4>دليل الحسابات (إيرادات المبيعات العامة)</h4>
                 </div>
 
-                <!-- Payment Vouchers Section -->
-                <div id="paymentVouchersSection" class="content-section d-none">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4><i class="fas fa-receipt me-2"></i> سندات الصرف</h4>
-                        <button class="btn btn-sm btn-danger" onclick="openVoucherModal('payment')"><i class="fas fa-plus me-1"></i> إنشاء سند صرف جديد</button>
-                    </div>
-                    <div class="filter-panel no-print"><div class="row g-2 align-items-end"><div class="col-md-5"><label>بحث في رقم السند أو الجهة أو البيان أو المبلغ</label><input id="paymentSearch" class="form-control form-control-sm" oninput="renderVouchersTables()"></div><div class="col-md-3 col-6"><label>من تاريخ</label><input id="paymentStart" type="date" class="form-control form-control-sm" onchange="renderVouchersTables()"></div><div class="col-md-3 col-6"><label>إلى تاريخ</label><input id="paymentEnd" type="date" class="form-control form-control-sm" onchange="renderVouchersTables()"></div><div class="col-md-1"><button class="btn btn-sm btn-outline-secondary w-100" onclick="clearListFilter('payment')">مسح</button></div></div></div>
-                    <div class="card border-0 shadow-sm">
-                        <div class="card-body p-2">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-compact text-center mb-0">
-                                    <thead class="table-dark-orange">
-                                        <tr>
-                                            <th>رقم السند</th>
-                                            <th>التاريخ</th>
-                                            <th>دفعت إلى</th>
-                                            <th>حساب الصندوق / البنك</th>
-                                            <th class="num-right">المبلغ</th>
-                                            <th>الإجراءات</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="paymentVouchersTableBody"></tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Account Statement Report -->
-                <div id="accountStatementSection" class="content-section d-none">
-                    <div class="card border-0 shadow-sm mb-3 no-print">
-                        <div class="card-header bg-white"><b>تصفية كشف الحساب</b></div>
-                        <div class="card-body p-3">
-                            <div class="row g-2 align-items-end">
-                                <div class="col-md-4">
-                                    <label class="form-label mb-1">اختر الحساب</label>
-                                    <input list="accountsDatalist" id="stmtAccountInput" class="form-control form-control-sm nav-navigable" placeholder="ابحث بالحرف أو الرمز...">
-                                </div>
-                                <div class="col-md-3 col-6">
-                                    <label class="form-label mb-1">من تاريخ</label>
-                                    <input type="date" id="stmtStartDate" class="form-control form-control-sm nav-navigable">
-                                </div>
-                                <div class="col-md-3 col-6">
-                                    <label class="form-label mb-1">إلى تاريخ</label>
-                                    <input type="date" id="stmtEndDate" class="form-control form-control-sm nav-navigable">
-                                </div>
-                                <div class="col-md-2">
-                                    <button class="btn btn-sm btn-primary w-100" onclick="generateAccountStatement()"><i class="fas fa-search me-1"></i> عرض الكشف</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="statementReportArea"></div>
-                </div>
-
-                <!-- Trial Balance Movement Report -->
-                <div id="trialBalanceMovementSection" class="content-section d-none">
-                    <div class="card border-0 shadow-sm mb-3 no-print">
-                        <div class="card-header bg-white"><b>خيارات ميزان المراجعة بالحركة</b></div>
-                        <div class="card-body p-3">
-                            <div class="row g-2 align-items-end">
-                                <div class="col-md-4 col-6">
-                                    <label class="form-label mb-1">من تاريخ</label>
-                                    <input type="date" id="tbmStartDate" class="form-control form-control-sm nav-navigable">
-                                </div>
-                                <div class="col-md-4 col-6">
-                                    <label class="form-label mb-1">إلى تاريخ</label>
-                                    <input type="date" id="tbmEndDate" class="form-control form-control-sm nav-navigable">
-                                </div>
-                                <div class="col-md-4 d-flex gap-2">
-                                    <button class="btn btn-sm btn-primary flex-grow-1" onclick="generateTBMReport()"><i class="fas fa-sync me-1"></i> عرض الميزان</button>
-                                    <button class="btn btn-sm btn-outline-danger" onclick="exportReportToPDF('tbmReportContainer', 'ميزان_المراجعة_بالحركة')"><i class="fas fa-file-pdf"></i> PDF</button>
-                                    <button class="btn btn-sm btn-outline-success" onclick="exportTableToExcel('tbmTable', 'Trial_Balance_Movement')"><i class="fas fa-file-excel"></i> Excel</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="tbmReportContainer"></div>
-                </div>
-
-                <!-- Trial Balance Balance Report -->
-                <div id="trialBalanceBalanceSection" class="content-section d-none">
-                    <div class="card border-0 shadow-sm mb-3 no-print">
-                        <div class="card-header bg-white"><b>خيارات ميزان المراجعة بالرصيد</b></div>
-                        <div class="card-body p-3">
-                            <div class="row g-2 align-items-end">
-                                <div class="col-md-4 col-6">
-                                    <label class="form-label mb-1">من تاريخ</label>
-                                    <input type="date" id="tbbStartDate" class="form-control form-control-sm nav-navigable">
-                                </div>
-                                <div class="col-md-4 col-6">
-                                    <label class="form-label mb-1">إلى تاريخ</label>
-                                    <input type="date" id="tbbEndDate" class="form-control form-control-sm nav-navigable">
-                                </div>
-                                <div class="col-md-4 d-flex gap-2">
-                                    <button class="btn btn-sm btn-primary flex-grow-1" onclick="generateTBBReport()"><i class="fas fa-sync me-1"></i> عرض الميزان</button>
-                                    <button class="btn btn-sm btn-outline-danger" onclick="exportReportToPDF('tbbReportContainer', 'ميزان_المراجعة_بالرصيد')"><i class="fas fa-file-pdf"></i> PDF</button>
-                                    <button class="btn btn-sm btn-outline-success" onclick="exportTableToExcel('tbbTable', 'Trial_Balance_Balances')"><i class="fas fa-file-excel"></i> Excel</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="tbbReportContainer"></div>
-                </div>
-
-                <!-- Trading Account Section -->
-                <div id="tradingAccountSection" class="content-section d-none">
-                    <div class="card border-0 shadow-sm mb-3 no-print">
-                        <div class="card-header bg-white"><b>فترة حساب المتاجرة</b></div>
-                        <div class="card-body p-3">
-                            <div class="row g-2 align-items-end">
-                                <div class="col-md-4 col-6">
-                                    <label class="form-label mb-1">من تاريخ</label>
-                                    <input type="date" id="tradStartDate" class="form-control form-control-sm nav-navigable">
-                                </div>
-                                <div class="col-md-4 col-6">
-                                    <label class="form-label mb-1">إلى تاريخ</label>
-                                    <input type="date" id="tradEndDate" class="form-control form-control-sm nav-navigable">
-                                </div>
-                                <div class="col-md-4 d-flex gap-2">
-                                    <button class="btn btn-sm btn-primary flex-grow-1" onclick="generateTradingAccount()"><i class="fas fa-calculator me-1"></i> احتساب المتاجرة</button>
-                                    <button class="btn btn-sm btn-outline-danger" onclick="exportReportToPDF('tradingReportContainer', 'حساب_المتاجرة')"><i class="fas fa-file-pdf"></i> PDF</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="tradingReportContainer"></div>
-                </div>
-
-                <!-- Income Statement Section -->
-                <div id="incomeStatementSection" class="content-section d-none">
-                    <div class="card border-0 shadow-sm mb-3 no-print">
-                        <div class="card-header bg-white d-flex justify-content-between align-items-center flex-wrap gap-2">
-                            <b>قائمة / بيان الدخل</b>
-                            <div class="d-flex align-items-center gap-2">
-                                <label class="small fw-bold mb-0">عدد الأعمدة المعروضة:</label>
-                                <select id="incColCount" class="form-select form-select-sm" style="width:auto;" onchange="toggleIncColumnsUI(); generateIncomeStatement();">
-                                    <option value="3" selected>3 أعمدة (فترتان + المجمع)</option>
-                                    <option value="2">عمودان (فترتان)</option>
-                                    <option value="1">عمود واحد (فترة واحدة)</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="card-body p-3">
-                            <div class="row g-2 align-items-end">
-                                <div class="col-md-2 col-6" id="incColWrap1A">
-                                    <label class="form-label mb-1 small">الفترة (1) من</label>
-                                    <input type="date" id="incStartDate" class="form-control form-control-sm nav-navigable">
-                                </div>
-                                <div class="col-md-2 col-6" id="incColWrap1B">
-                                    <label class="form-label mb-1 small">الفترة (1) إلى</label>
-                                    <input type="date" id="incEndDate" class="form-control form-control-sm nav-navigable" onchange="syncIncYtdDefault()">
-                                </div>
-                                <div class="col-md-2 col-6" id="incColWrap2A">
-                                    <label class="form-label mb-1 small">الفترة (2) من</label>
-                                    <input type="date" id="incStartDate2" class="form-control form-control-sm nav-navigable">
-                                </div>
-                                <div class="col-md-2 col-6" id="incColWrap2B">
-                                    <label class="form-label mb-1 small">الفترة (2) إلى</label>
-                                    <input type="date" id="incEndDate2" class="form-control form-control-sm nav-navigable">
-                                </div>
-                                <div class="col-md-2 col-6" id="incColWrap3">
-                                    <label class="form-label mb-1 small">المُجمّع (من 01/01 حتى نهاية شهر)</label>
-                                    <input type="month" id="incYtdMonth" class="form-control form-control-sm nav-navigable">
-                                </div>
-                                <div class="col-md-2 col-6 d-flex gap-1">
-                                    <button class="btn btn-sm btn-primary flex-grow-1" onclick="generateIncomeStatement()"><i class="fas fa-file-invoice me-1"></i> عرض</button>
-                                    <button class="btn btn-sm btn-outline-danger" onclick="exportReportToPDF('incomeReportContainer', 'قائمة_الدخل')"><i class="fas fa-file-pdf"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="incomeReportContainer"></div>
-                </div>
-
-                <!-- Balance Sheet Section -->
-                <div id="balanceSheetSection" class="content-section d-none">
-                    <div class="card border-0 shadow-sm mb-3 no-print">
-                        <div class="card-header bg-white d-flex justify-content-between align-items-center flex-wrap gap-2">
-                            <b>بيان المركز المالي (الميزانية العمومية)</b>
-                            <div class="d-flex align-items-center gap-2">
-                                <label class="small fw-bold mb-0">عدد الأعمدة:</label>
-                                <select id="bsColCount" class="form-select form-select-sm" style="width:auto;" onchange="toggleBsColumnsUI(); generateBalanceSheet();">
-                                    <option value="1" selected>عمود واحد</option>
-                                    <option value="2">عمودان (2)</option>
-                                    <option value="3">3 أعمدة</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="card-body p-3">
-                            <div class="row g-2 align-items-end">
-                                <div class="col-md-3 col-6"><label class="form-label mb-1 small">طريقة العرض</label><select id="bsViewMode" class="form-select form-select-sm" onchange="generateBalanceSheet()"><option value="summary" selected>مستوى مجمع</option><option value="detail">مستوى تفصيلي</option></select></div>
-                                <div class="col-md-3 col-6" id="bsColWrap1">
-                                    <label class="form-label mb-1 small">الفترة الحالية (1)</label>
-                                    <input type="date" id="bsAsOfDate" class="form-control form-control-sm nav-navigable">
-                                </div>
-                                <div class="col-md-3 col-6 d-none" id="bsColWrap2">
-                                    <label class="form-label mb-1 small">المقارنة (2)</label>
-                                    <input type="date" id="bsCompareDate1" class="form-control form-control-sm nav-navigable">
-                                </div>
-                                <div class="col-md-3 col-6 d-none" id="bsColWrap3">
-                                    <label class="form-label mb-1 small">المقارنة (3)</label>
-                                    <input type="date" id="bsCompareDate2" class="form-control form-control-sm nav-navigable">
-                                </div>
-                                <div class="col-md-3 col-6 d-flex gap-2">
-                                    <button class="btn btn-sm btn-primary flex-grow-1" onclick="generateBalanceSheet()"><i class="fas fa-balance-scale-right me-1"></i> إعداد</button>
-                                    <button class="btn btn-sm btn-outline-danger" onclick="exportReportToPDF('balanceSheetReportContainer', 'بيان_المركز_المالي')"><i class="fas fa-file-pdf"></i> PDF</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="balanceSheetReportContainer"></div>
-                </div>
-
-                <!-- Settings & Backup Section -->
                 <div id="settingsSection" class="content-section d-none">
-                    <h4 class="mb-3"><i class="fas fa-sliders-h me-2"></i> إعدادات النظام والنسخ الاحتياطي السحابي</h4>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="card border-0 shadow-sm mb-4">
-                                <div class="card-header bg-white font-weight-bold"><i class="fas fa-database me-2"></i> النسخ الاحتياطي والإعادة</div>
-                                <div class="card-body">
-                                    <p class="text-muted small">قم بتصدير كامل بيانات النظام في ملف مفرد للنسخ الاحتياطي أو لاسترجاعه في وقت لاحق.</p>
-                                    <div class="d-grid gap-2">
-                                        <button class="btn btn-outline-primary" onclick="exportBackup()"><i class="fas fa-download me-2"></i> تصدير نسخة احتياطية (JSON)</button>
-                                        <div class="mt-2">
-                                            <label class="form-label fw-bold small">استعادة نسخة احتياطية من ملف:</label>
-                                            <input type="file" id="backupFileInput" class="form-control form-control-sm" accept=".json" onchange="importBackup(event)">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card border-0 shadow-sm mb-4 border-danger">
-                                <div class="card-header bg-danger text-white font-weight-bold"><i class="fas fa-exclamation-triangle me-2"></i> منطقة الخطر / إعادة التهيئة</div>
-                                <div class="card-body">
-                                    <p class="text-muted small">إعادة ضبط النظام وإرجاع الحسابات والبيانات للوضع المبدئي الأصلي ومسح قاعدة البيانات السحابية.</p>
-                                    <button class="btn btn-danger btn-sm" onclick="resetToDefaultData()"><i class="fas fa-trash-alt me-2"></i> مسح كامل البيانات والعودة للوضع المبدئي</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <h4>الإعدادات</h4>
                 </div>
-
-                <!-- Cash Flow -->
-                <div id="cashFlowSection" class="content-section d-none">
-                    <div class="card border-0 shadow-sm mb-3"><div class="card-header bg-white fw-bold">تصنيف الحسابات لأغراض التدفقات النقدية</div><div class="card-body"><div class="row g-2 align-items-end"><div class="col-md-4"><label>الحساب المقابل للنقدية</label><select id="cfClassAccount" class="form-select form-select-sm"></select></div><div class="col-md-4"><label>نوع التدفق</label><select id="cfClassType" class="form-select form-select-sm"><option value="operating">تشغيلي</option><option value="investing">استثماري</option><option value="financing">تمويلي</option></select></div><div class="col-md-4"><button class="btn btn-outline-primary w-100" onclick="saveCashFlowClass()">حفظ التصنيف</button></div></div></div></div><div class="card border-0 shadow-sm mb-3"><div class="card-header bg-white fw-bold">قائمة التدفقات النقدية</div><div class="card-body"><div class="row g-2 align-items-end"><div class="col-md-4 col-6"><label>من تاريخ</label><input type="date" id="cfStart" class="form-control form-control-sm"></div><div class="col-md-4 col-6"><label>إلى تاريخ</label><input type="date" id="cfEnd" class="form-control form-control-sm"></div><div class="col-md-4 d-flex gap-2"><button class="btn btn-primary flex-grow-1" onclick="generateCashFlow()">عرض القائمة</button><button class="btn btn-outline-danger" onclick="exportReportToPDF('cashFlowReport','قائمة_التدفقات_النقدية')">PDF</button></div></div></div></div><div id="cashFlowReport"></div>
-                </div>
-
-                <!-- Aging -->
-                <div id="agingSection" class="content-section d-none">
-                    <div class="card border-0 shadow-sm mb-3"><div class="card-header bg-white fw-bold">تسجيل فاتورة آجلة</div><div class="card-body"><div class="row g-2"><div class="col-md-2 col-6"><label>النوع</label><select id="ageInvType" class="form-select form-select-sm"><option value="customer">فاتورة عميل</option><option value="supplier">فاتورة مورد</option></select></div><div class="col-md-2 col-6"><label>رقم الفاتورة</label><input id="ageInvRef" class="form-control form-control-sm"></div><div class="col-md-2"><label>اسم العميل / المورد</label><input id="ageInvParty" class="form-control form-control-sm"></div><div class="col-md-2 col-6"><label>تاريخ الفاتورة</label><input id="ageInvDate" type="date" class="form-control form-control-sm"></div><div class="col-md-2 col-6"><label>تاريخ الاستحقاق</label><input id="ageInvDue" type="date" class="form-control form-control-sm"></div><div class="col-md-2"><label>المبلغ</label><input id="ageInvAmount" type="number" min="0.001" step="0.001" class="form-control form-control-sm"></div></div><div class="row g-2 mt-1"><div class="col-md-5"><label>حساب العميل / المورد</label><input id="ageInvControl" list="accountsDatalist" class="form-control form-control-sm" placeholder="رمز - اسم الحساب"></div><div class="col-md-5"><label>الحساب المقابل</label><input id="ageInvOffset" list="accountsDatalist" class="form-control form-control-sm" placeholder="رمز - اسم الحساب"></div><div class="col-md-2 d-flex align-items-end"><button class="btn btn-primary btn-sm w-100" onclick="saveAgingInvoice()">تسجيل الفاتورة</button></div></div></div></div><div class="card border-0 shadow-sm mb-3"><div class="card-body"><div class="row g-2 align-items-end"><div class="col-md-6"><label>تقرير الأعمار كما في تاريخ</label><input type="date" id="agingAsOf" class="form-control form-control-sm"></div><div class="col-md-6 d-flex gap-2"><button class="btn btn-primary btn-sm flex-grow-1" onclick="generateAging()">احتساب الأعمار</button><button class="btn btn-outline-danger btn-sm" onclick="exportReportToPDF('agingReport','اعمار_الديون')">PDF</button></div></div></div></div><div id="agingInvoiceList" class="mb-3"></div><div id="unallocatedArApSources" class="mb-3"></div><div id="agingReport"></div>
-                </div>
-
-                <!-- Cost centers -->
-                <div id="costCentersSection" class="content-section d-none"><div class="card border-0 shadow-sm mb-3"><div class="card-header bg-white fw-bold">تقرير مراكز التكلفة</div><div class="card-body"><div class="row g-2 align-items-end"><div class="col-md-4"><label>مركز التكلفة</label><select id="ccReportSelect" class="form-select form-select-sm"></select></div><div class="col-md-3 col-6"><label>من تاريخ</label><input type="date" id="ccStart" class="form-control form-control-sm"></div><div class="col-md-3 col-6"><label>إلى تاريخ</label><input type="date" id="ccEnd" class="form-control form-control-sm"></div><div class="col-md-2"><button class="btn btn-primary btn-sm w-100" onclick="generateCostCenterReport()">عرض</button></div></div></div></div><div id="costCenterReport"></div></div>
-
-                <!-- Bank Reconciliation -->
-                <div id="bankReconciliationSection" class="content-section d-none"><div class="card border-0 shadow-sm mb-3"><div class="card-header bg-white fw-bold">تسوية البنك</div><div class="card-body"><div class="row g-2 align-items-end"><div class="col-md-4"><label>حساب البنك</label><select id="bankRecAccount" class="form-select form-select-sm"></select></div><div class="col-md-3 col-6"><label>حتى تاريخ</label><input id="bankRecDate" type="date" class="form-control form-control-sm"></div><div class="col-md-3 col-6"><label>رصيد كشف البنك</label><input id="bankStatementBalance" type="number" step="0.001" class="form-control form-control-sm"></div><div class="col-md-3 col-6"><label>إيداعات بالطريق (+)</label><input id="bankDepositsTransit" type="number" step="0.001" class="form-control form-control-sm" placeholder="0.000"></div><div class="col-md-3 col-6"><label>شيكات معلقة (-)</label><input id="bankOutstandingChecks" type="number" step="0.001" class="form-control form-control-sm" placeholder="0.000"></div><div class="col-md-3"><label>رسوم / فوائد (+/-)</label><input id="bankUnrecordedAdjust" type="number" step="0.001" class="form-control form-control-sm" placeholder="0.000"></div><div class="col-md-12 mt-2"><button class="btn btn-primary btn-sm w-100" onclick="generateBankReconciliation()">إعداد التسوية البنكية</button></div></div></div></div><div id="bankRecReport"></div></div>
-
-                <!-- Comparative -->
-                <div id="comparativeSection" class="content-section d-none"><div class="card border-0 shadow-sm mb-3"><div class="card-header bg-white fw-bold">قائمة دخل مقارنة بين فترتين</div><div class="card-body"><div class="row g-2"><div class="col-md-3 col-6"><label>بداية الفترة الأولى</label><input type="date" id="cmpS1" class="form-control form-control-sm"></div><div class="col-md-3 col-6"><label>نهاية الفترة الأولى</label><input type="date" id="cmpE1" class="form-control form-control-sm"></div><div class="col-md-3 col-6"><label>بداية الفترة الثانية</label><input type="date" id="cmpS2" class="form-control form-control-sm"></div><div class="col-md-3 col-6"><label>نهاية الفترة الثانية</label><input type="date" id="cmpE2" class="form-control form-control-sm"></div></div><button class="btn btn-primary btn-sm mt-3" onclick="generateComparativeReport()">عرض المقارنة</button> <button class="btn btn-outline-danger btn-sm mt-3" onclick="exportReportToPDF('comparativeReport','قائمة_دخل_مقارنة')">PDF</button></div></div><div id="comparativeReport"></div></div>
-
-                <!-- Fixed Assets -->
-                <div id="fixedAssetsSection" class="content-section d-none"><div class="d-flex justify-content-between align-items-center mb-3"><h4>سجل الأصول الثابتة والإهلاك</h4><button class="btn btn-primary btn-sm" onclick="addFixedAsset()"><i class="fas fa-plus me-1"></i> تسجيل أصل ثابت</button></div><div class="card border-0 shadow-sm mb-3"><div class="card-body"><div class="row g-2 align-items-end"><div class="col-md-6"><label>ترحيل الإهلاك حتى نهاية شهر</label><input type="date" id="deprToDate" class="form-control form-control-sm"></div><div class="col-md-6"><button class="btn btn-warning btn-sm w-100" onclick="postDepreciation()">احتساب وترحيل الإهلاك</button></div></div></div></div><div id="fixedAssetsTable" class="card border-0 shadow-sm"></div></div>
-
-                <!-- Users -->
-                <div id="usersSection" class="content-section d-none"><div class="d-flex justify-content-between align-items-center mb-3"><h4>المستخدمون والصلاحيات</h4><button class="btn btn-primary btn-sm" onclick="createUser()">إضافة مستخدم</button></div><div class="alert alert-info small">النظام مجهز بالمزامنة السحابية المباشرة عبر Firebase Firestore لكافة العمليات والأجهزة المعتمدة.</div><div class="card border-0 shadow-sm"><div class="table-responsive"><table class="table table-bordered table-compact text-center mb-0"><thead class="table-dark-orange"><tr><th>اسم المستخدم</th><th>الاسم الظاهر</th><th>الدور</th><th>تعديل الاسم</th><th>تغيير كلمة المرور</th></tr></thead><tbody id="usersTableBody"></tbody></table></div></div></div>
-
-                <!-- Audit Log Section -->
-                <div id="auditLogSection" class="content-section d-none">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4><i class="fas fa-history me-2"></i> سجل العمليات والتعديلات</h4>
-                        <button class="btn btn-sm btn-outline-danger" onclick="exportReportToPDF('auditLogReport','سجل_العمليات')"><i class="fas fa-file-pdf me-1"></i> تصدير PDF</button>
-                    </div>
-                    <div class="filter-panel no-print"><div class="row g-2 align-items-end"><div class="col-md-5"><label>بحث بالحرف في المستخدم أو العملية أو المرجع أو التفاصيل</label><input id="auditSearch" class="form-control form-control-sm" oninput="renderAuditLog()"></div><div class="col-md-3 col-6"><label>من تاريخ</label><input id="auditStart" type="date" class="form-control form-control-sm" onchange="renderAuditLog()"></div><div class="col-md-3 col-6"><label>إلى تاريخ</label><input id="auditEnd" type="date" class="form-control form-control-sm" onchange="renderAuditLog()"></div><div class="col-md-1"><button class="btn btn-sm btn-outline-secondary w-100" onclick="clearListFilter('audit')">مسح</button></div></div></div>
-                    <div id="auditLogReport" class="card border-0 shadow-sm">
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-compact text-center" id="auditLogTable">
-                                    <thead class="table-dark-orange">
-                                        <tr><th>التاريخ والوقت</th><th>المستخدم</th><th>العملية</th><th>نوع السجل</th><th>المرجع</th><th>التفاصيل</th></tr>
-                                    </thead>
-                                    <tbody id="auditLogTableBody"></tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
-
-    <!-- Datalist for Account Search Autocomplete -->
-    <datalist id="accountsDatalist"></datalist>
-    <datalist id="cashAccountsDatalist"></datalist>
-
-    <!-- Modals (Account, Entry, Voucher, Asset, etc.) kept fully intact -->
-    <!-- Mobile Bottom Navigation Bar -->
-    <nav class="mobile-bottom-nav no-print" id="mobileBottomNav">
-        <button type="button" class="mob-nav-btn active" data-sec="dashboard" onclick="showSection('dashboard')"><i class="fas fa-chart-pie"></i><span>الرئيسية</span></button>
-        <button type="button" class="mob-nav-btn" data-sec="journalEntries" onclick="showSection('journalEntries')"><i class="fas fa-book"></i><span>القيود</span></button>
-        <button type="button" class="mob-nav-btn" data-sec="receiptVouchers" onclick="showSection('receiptVouchers')"><i class="fas fa-file-invoice-dollar"></i><span>القبض</span></button>
-        <button type="button" class="mob-nav-btn" data-sec="paymentVouchers" onclick="showSection('paymentVouchers')"><i class="fas fa-receipt"></i><span>الصرف</span></button>
-        <button type="button" class="mob-nav-btn" data-sec="accountStatement" onclick="showSection('accountStatement')"><i class="fas fa-list-alt"></i><span>كشف حساب</span></button>
-        <button type="button" class="mob-nav-btn" data-sec="more" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar"><i class="fas fa-bars"></i><span>المزيد</span></button>
-    </nav>
 
     <!-- Developer Signature Card -->
     <a href="https://yasser-q8.github.io/myprofile/#" class="signature-card" target="_blank" rel="noopener noreferrer">
@@ -807,85 +147,104 @@
         <div class="title">مطور البرنامج 67011143</div>
     </a>
 
-    <!-- Bootstrap JavaScript bundle -->
-    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Firebase Configuration & Sync Script -->
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-      (function initFirebaseCompat() {
-        const start = () => {
-          const badge = document.getElementById('syncStatusBadge');
-          const setBadge = (kind, text) => {
-            if (!badge) return;
-            badge.className = 'badge ' + (kind === 'success' ? 'bg-success' : kind === 'danger' ? 'bg-danger' : 'bg-warning text-dark') + ' firebase-status-badge';
-            badge.innerHTML = (kind === 'success' ? '<i class="fas fa-cloud-check"></i> ' : kind === 'danger' ? '<i class="fas fa-triangle-exclamation"></i> ' : '<i class="fas fa-wifi"></i> ') + '<span class="d-none d-sm-inline">' + text + '</span>';
-          };
-          window.firebaseInitFailed = false;
-          window.remoteDataLoaded = false;
-          window.cloudInitialized = false;
-          if (!window.firebase || !firebase.apps) {
-            console.error('Firebase SDK could not be loaded.');
-            return;
-          }
-          try {
-            const firebaseConfig = {
-              apiKey: "AIzaSyACAl4I4o1NZR95xFPh-GfHyRDMcvsCGL4",
-              authDomain: "yasr-acc.firebaseapp.com",
-              projectId: "yasr-acc",
-              storageBucket: "yasr-acc.firebasestorage.app",
-              messagingSenderId: "715379191291",
-              appId: "1:715379191291:web:27631f9f8a3c4dd03eef5e"
-            };
-            if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
-            const db = firebase.firestore();
-            try { db.settings({ experimentalAutoDetectLongPolling: true, useFetchStreams: false }); } catch (e) {}
-            const docRef = db.collection('accounting').doc('appState');
-            window.db = db;
-            window.docRef = docRef;
-            window.isRemoteUpdate = false;
-
-            window.syncStateToCloud = async function(forceWrite = false) {
-              if (!window.cloudInitialized && !forceWrite) return false;
-              try {
-                const serialized = JSON.stringify(window.state);
-                try { localStorage.setItem('yasser_elkhateeb_acc_state', serialized); } catch (e) {}
-                await docRef.set(JSON.parse(serialized));
-                window.remoteDataLoaded = true;
-                setBadge('success', 'متصل ومتزامن');
-                if (typeof window.updateLoginAvailability === 'function') window.updateLoginAvailability();
-                return true;
-              } catch (err) {
-                console.error('Cloud Sync Error:', err);
-                setBadge('danger', 'فشل الحفظ السحابي');
-                return false;
-              }
-            };
-
-            docRef.onSnapshot(async (docSnap) => {
-              try {
-                if (docSnap.exists) {
-                  const data = docSnap.data() || {};
-                  window.state = { ...window.state, ...data };
-                  try { localStorage.setItem('yasser_elkhateeb_acc_state', JSON.stringify(window.state)); window.localCacheFound = true; } catch (e) {}
-                } else {
-                  window.cloudInitialized = true;
-                  await window.syncStateToCloud(true);
-                }
-                window.cloudInitialized = true;
-                window.remoteDataLoaded = true;
-                setBadge('success', 'متصل ومتزامن');
-                if (typeof refreshActiveUI === 'function') refreshActiveUI();
-                if (typeof window.restoreSessionAfterRemoteLoad === 'function') window.restoreSessionAfterRemoteLoad();
-                if (typeof window.updateLoginAvailability === 'function') window.updateLoginAvailability();
-              } catch (err) {
-                console.error(err);
-              }
-            });
-          } catch (err) { console.error(err); }
+        // Default application state
+        window.state = {
+            currentUser: null,
+            users: [
+                { username: 'admin', password: '123456', displayName: 'مدير النظام', role: 'admin' }
+            ],
+            accounts: [
+                { code: '4101', name: 'إيرادات المبيعات العامة', type: 'revenue', report: 'income' }
+            ],
+            journalEntries: []
         };
-        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true });
-        else start();
-      })();
+
+        function login() {
+            const u = document.getElementById('loginUsername').value.trim();
+            const p = document.getElementById('loginPassword').value.trim();
+            const err = document.getElementById('loginError');
+            const found = window.state.users.find(x => x.username === u && x.password === p);
+            if (found) {
+                window.state.currentUser = found;
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('currentUserLabel').innerText = found.displayName;
+                refreshActiveUI();
+            } else {
+                err.innerText = 'اسم المستخدم أو كلمة المرور غير صحيحة';
+            }
+        }
+
+        function logout() {
+            window.state.currentUser = null;
+            document.getElementById('loginScreen').style.display = 'flex';
+        }
+
+        function showSection(secId) {
+            document.querySelectorAll('.content-section').forEach(el => el.classList.add('d-none'));
+            const target = document.getElementById(secId + 'Section');
+            if (target) target.classList.remove('d-none');
+        }
+
+        function refreshActiveUI() {
+            const total = (window.state.journalEntries || []).length;
+            const el = document.getElementById('dashTotalEntries');
+            if (el) el.innerText = total;
+        }
+
+        window.updateLoginAvailability = function() {
+            const btn = document.getElementById('loginButton');
+            const status = document.getElementById('loginConnectionStatus');
+            if (btn) btn.disabled = false;
+            if (status) status.innerText = 'متصل وجاهز لتسجيل الدخول';
+        };
+
+        // Firebase Initialization & Sync
+        (function initFirebaseCompat() {
+            const start = () => {
+                const badge = document.getElementById('syncStatusBadge');
+                const setBadge = (kind, text) => {
+                    if (!badge) return;
+                    badge.className = 'badge ' + (kind === 'success' ? 'bg-success' : kind === 'danger' ? 'bg-danger' : 'bg-warning text-dark') + ' firebase-status-badge';
+                    badge.innerHTML = (kind === 'success' ? '<i class="fas fa-cloud-check"></i> ' : '<i class="fas fa-wifi"></i> ') + '<span class="d-none d-sm-inline">' + text + '</span>';
+                };
+                try {
+                    const firebaseConfig = {
+                        apiKey: "AIzaSyACAl4I4o1NZR95xFPh-GfHyRDMcvsCGL4",
+                        authDomain: "yasr-acc.firebaseapp.com",
+                        projectId: "yasr-acc",
+                        storageBucket: "yasr-acc.firebasestorage.app",
+                        messagingSenderId: "715379191291",
+                        appId: "1:715379191291:web:27631f9f8a3c4dd03eef5e"
+                    };
+                    if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+                    const db = firebase.firestore();
+                    const docRef = db.collection('accounting').doc('appState');
+                    
+                    docRef.onSnapshot((docSnap) => {
+                        if (docSnap.exists) {
+                            const data = docSnap.data() || {};
+                            window.state = { ...window.state, ...data };
+                        } else {
+                            docRef.set(window.state);
+                        }
+                        setBadge('success', 'متصل ومتزامن');
+                        window.updateLoginAvailability();
+                        refreshActiveUI();
+                    }, (error) => {
+                        setBadge('danger', 'خطأ في الاتصال السحابي');
+                        window.updateLoginAvailability();
+                    });
+                } catch (e) {
+                    setBadge('danger', 'تعذر تهيئة الاتصال');
+                    window.updateLoginAvailability();
+                }
+            };
+            if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true });
+            else start();
+        })();
     </script>
 </body>
 </html>
