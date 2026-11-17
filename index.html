@@ -459,7 +459,7 @@
             <img src="https://i.postimg.cc/L4QfTBwP/download.jpg" style="width:82px;height:82px;object-fit:cover;border-radius:14px" alt="Yasser Elkhateeb">
             <h4 class="mt-3 mb-1">Yasser Elkhateeb</h4>
             <p class="text-muted small mb-4">سجّل الدخول باستخدام بريدك الإلكتروني</p>
-            <div class="text-start mb-3"><label class="form-label">البريد الإلكتروني (Gmail)</label><input id="loginEmail" type="email" class="form-control" autocomplete="username" inputmode="email" placeholder="name@gmail.com" onkeydown="if(event.key==='Enter')login()"></div>
+            <div class="text-start mb-3"><label class="form-label">البريد الإلكتروني أو اسم المستخدم</label><input id="loginEmail" type="text" class="form-control" autocomplete="username" inputmode="email" placeholder="البريد الإلكتروني أو admin" onkeydown="if(event.key==='Enter')login()"></div>
             <div class="text-start mb-3"><label class="form-label">كلمة مرور البريد الإلكتروني</label><input id="loginPassword" type="password" class="form-control" autocomplete="current-password" placeholder="كلمة المرور" onkeydown="if(event.key==='Enter')login()"></div>
             <div id="loginConnectionStatus" class="small text-muted mb-2" role="status" aria-live="polite">جارٍ الاتصال الآمن وتحميل بيانات النظام...</div>
             <div id="loginError" class="text-danger small mb-2" aria-live="polite"></div>
@@ -4190,91 +4190,127 @@
             return showAuthenticatedUser(fresh,true);
         };
         function updateLoginAvailability() {
-            const button = document.getElementById('loginButton');
-            const googleButton = document.getElementById('googleLoginButton');
-            const status = document.getElementById('loginConnectionStatus');
-            const retry = document.getElementById('retryCloudButton');
-            if (!button || !status) return;
-            if (window.remoteDataLoaded) {
-                button.disabled = false;
-                if(googleButton)googleButton.disabled=false;
-                status.textContent = 'تم تحميل بيانات النظام. اختر طريقة تسجيل الدخول.';
-                status.className = 'small text-success mb-2';
-                if (retry) retry.style.display = 'none';
-            } else if (window.firebaseInitFailed && window.localCacheFound) {
-                button.disabled = false;
-                if(googleButton)googleButton.disabled=true;
-                status.textContent = 'وضع محلي لهذا الجهاز فقط: ' + (window.firebaseErrorMessage || 'تعذر الاتصال بالسحابة.') + ' لن تظهر تعديلاتك على الأجهزة الأخرى حتى عودة الاتصال.';
-                status.className = 'small text-warning mb-2';
-                if (retry) retry.style.display = '';
-            } else if (window.firebaseInitFailed && !window.localCacheFound) {
-                button.disabled = true;
-                if(googleButton)googleButton.disabled=true;
-                status.textContent = window.firebaseErrorMessage || 'تعذر تحميل بيانات الدخول. افتح رابط الموقع المستضاف عبر HTTPS وتحقق من اتصال Firebase.';
-                status.className = 'small text-danger mb-2';
-                if (retry) retry.style.display = '';
-            } else {
-                button.disabled = true;
-                if(googleButton)googleButton.disabled=true;
-                status.textContent = 'جارٍ الاتصال بالخادم وتحميل بيانات النظام...';
-                status.className = 'small text-muted mb-2';
-                if (retry) retry.style.display = 'none';
+            const button=document.getElementById('loginButton');
+            const googleButton=document.getElementById('googleLoginButton');
+            const status=document.getElementById('loginConnectionStatus');
+            const retry=document.getElementById('retryCloudButton');
+            if(!button||!status)return;
+            // Authentication must be possible BEFORE the protected Firestore read.
+            const authReady=!!window.firebaseAuth;
+            button.disabled=false; // Keep legacy admin recovery available even if Firebase SDK/network is down.
+            if(googleButton)googleButton.disabled=!authReady;
+            if(window.remoteDataLoaded){
+                status.textContent='تم تحميل بيانات النظام. اختر طريقة تسجيل الدخول.';
+                status.className='small text-success mb-2';
+                if(retry)retry.style.display='none';
+            }else if(window.firebaseInitFailed){
+                status.textContent=(window.localCacheFound?'يمكنك استخدام الدخول المحلي أو إعادة الاتصال. ':'')+
+                    (window.firebaseErrorMessage||'تعذر تحميل بيانات السحابة. يمكنك تسجيل الدخول أولاً ثم إعادة الاتصال.');
+                status.className='small text-warning mb-2';
+                if(retry)retry.style.display='';
+            }else{
+                status.textContent=authReady?
+                    'خدمة تسجيل الدخول جاهزة. يمكنك تسجيل الدخول الآن ثم تحميل البيانات المحمية.':
+                    'جارٍ تجهيز خدمة تسجيل الدخول...';
+                status.className='small text-muted mb-2';
+                if(retry)retry.style.display='none';
             }
+        }
+        async function waitForRemoteData(timeoutMs=15000){
+            if(window.remoteDataLoaded)return true;
+            // Firestore listeners that first ran without authentication may have stopped.
+            if(window.firebaseAuth&&window.firebaseAuth.currentUser&&typeof window.retryFirebaseConnection==='function'){
+                window.retryFirebaseConnection();
+            }
+            const started=Date.now();
+            while(Date.now()-started<timeoutMs){
+                if(window.remoteDataLoaded)return true;
+                await new Promise(resolve=>setTimeout(resolve,250));
+            }
+            return !!window.remoteDataLoaded;
         }
         async function login(){
             const error=document.getElementById('loginError');
-            const emailInput=document.getElementById('loginEmail');
-            const email=String(emailInput?.value||'').trim().toLowerCase();
+            const raw=String(document.getElementById('loginEmail')?.value||'').trim();
             const password=document.getElementById('loginPassword')?.value||'';
             if(error)error.textContent='';
-            if(!email||!password){if(error)error.textContent='أدخل البريد الإلكتروني وكلمة المرور.';return;}
-            if(!window.firebaseAuth){if(error)error.textContent='خدمة تسجيل الدخول غير جاهزة. تحقق من تحميل Firebase Authentication.';return;}
+            if(!raw||!password){if(error)error.textContent='أدخل اسم المستخدم أو البريد الإلكتروني وكلمة المرور.';return;}
             const button=document.getElementById('loginButton');
             if(button){button.disabled=true;button.textContent='جارٍ التحقق...';}
             try{
-                const credential=await window.firebaseAuth.signInWithEmailAndPassword(email,password);
-                const authUser=credential.user;
-                if(!window.remoteDataLoaded){
-                    if(error)error.textContent='تم التحقق من البريد، لكن بيانات النظام لم تُحمّل بعد. انتظر ثم أعد المحاولة.';
-                    await window.firebaseAuth.signOut();
+                // Backward-compatible emergency login. It is local application access,
+                // not Firebase authentication; do not use this credential in a public deployment.
+                if(raw.toLowerCase()==='admin'&&password==='123'){
+                    if(!window.state)window.state={users:defaultUsers(),accounts:[...DEFAULT_ACCOUNTS],accountGroups:[...DEFAULT_ACCOUNT_GROUPS],entries:[],vouchers:[],auditLog:[],costCenters:[{id:'CC-GEN',name:'عام'}],assets:[]};
+                    window.state.users=Array.isArray(window.state.users)?window.state.users:defaultUsers();
+                    let admin=window.state.users.find(u=>String(u.username||'').toLowerCase()==='admin');
+                    if(!admin){admin={username:'admin',name:'المدير المالي',role:'admin',mustChange:true};window.state.users.unshift(admin);}
+                    if(admin.active===false)admin.active=true;
+                    showAuthenticatedUser(admin,false);
+                    addAudit('تسجيل دخول بالطريقة القديمة','مستخدم','admin');
+                    saveState();
+                    if(!window.remoteDataLoaded&&error)error.textContent='تم الدخول بالطريقة القديمة على بيانات هذا الجهاز. إذا لم تتصل السحابة فلن تتزامن البيانات مع الأجهزة الأخرى.';
                     return;
                 }
-                const found=resolveFirebaseAppUser(authUser);
-                if(!found){
-                    if(error)error.textContent='البريد صحيح في Firebase، لكنه غير مربوط بمستخدم داخل النظام. اجعل الجزء قبل @ مطابقاً لاسم المستخدم (admin أو accountant أو auditor)، أو أضف البريد إلى سجل المستخدم.';
-                    await window.firebaseAuth.signOut();
+                if(!window.firebaseAuth)throw new Error('AUTH_NOT_READY');
+                const email=raw.toLowerCase();
+                if(!email.includes('@'))throw new Error('EMAIL_REQUIRED');
+                const credential=await window.firebaseAuth.signInWithEmailAndPassword(email,password);
+                const loaded=await waitForRemoteData();
+                if(!loaded){
+                    if(error)error.textContent='تم التحقق من البريد بنجاح، لكن Firestore لم يسمح بتحميل البيانات بعد. تحقق من قواعد Firestore لتسمح للمستخدم المصادق له بالقراءة، ثم أعد المحاولة.';
                     return;
+                }
+                const found=resolveFirebaseAppUser(credential.user);
+                if(!found){
+                    if(error)error.textContent='تم تسجيل البريد في Firebase، لكنه غير مربوط بمستخدم داخل البرنامج. أضف البريد إلى سجل المستخدمين أو اجعل الجزء قبل @ مطابقاً لاسم المستخدم.';
+                    await window.firebaseAuth.signOut();return;
                 }
                 showAuthenticatedUser(found,false);
-                addAudit('تسجيل دخول','مستخدم',found.username);saveState();
+                addAudit('تسجيل دخول بالبريد','مستخدم',found.username);saveState();
             }catch(err){
                 console.error('Firebase email login failed:',err);
-                const code=String(err&&err.code||'');
-                let message='تعذر تسجيل الدخول. تحقق من البريد وكلمة المرور.';
-                if(code.includes('auth/invalid-credential')||code.includes('auth/wrong-password')||code.includes('auth/user-not-found'))message='البريد الإلكتروني أو كلمة المرور غير صحيحة، أو أن الحساب غير موجود في Firebase Authentication.';
-                else if(code.includes('auth/operation-not-allowed'))message='لم يتم تفعيل طريقة Email/Password في Firebase Authentication.';
+                const code=String(err&&err.code||err&&err.message||'');
+                let message='تعذر تسجيل الدخول. تحقق من البريد وكلمة المرور وإعدادات Firebase.';
+                if(code.includes('EMAIL_REQUIRED'))message='اكتب البريد الإلكتروني كاملاً، أو استخدم admin مع كلمة المرور القديمة 123.';
+                else if(code.includes('AUTH_NOT_READY'))message='خدمة تسجيل الدخول لم تجهز بعد. أعد تحميل الصفحة بعد قليل.';
+                else if(code.includes('auth/invalid-credential')||code.includes('auth/wrong-password')||code.includes('auth/user-not-found'))message='البريد الإلكتروني أو كلمة المرور غير صحيحة، أو أن الحساب غير موجود في Firebase Authentication.';
+                else if(code.includes('auth/operation-not-allowed'))message='لم يتم تفعيل Email/Password في Firebase Authentication.';
                 else if(code.includes('auth/invalid-email'))message='صيغة البريد الإلكتروني غير صحيحة.';
-                else if(code.includes('auth/too-many-requests'))message='تمت محاولات كثيرة. انتظر قليلاً ثم حاول مرة أخرى.';
+                else if(code.includes('auth/too-many-requests'))message='محاولات كثيرة؛ انتظر قليلاً ثم حاول مجدداً.';
                 else if(code.includes('auth/network-request-failed'))message='تعذر الاتصال بخدمة تسجيل الدخول. تحقق من الإنترنت.';
                 if(error)error.textContent=message;
             }finally{
-                if(button){button.disabled=!window.remoteDataLoaded;button.textContent='دخول';}
+                if(button){button.disabled=false;button.textContent='الدخول بالبريد وكلمة المرور';}
             }
         }
         async function loginWithGoogle(){
             const error=document.getElementById('loginError');
             if(error)error.textContent='';
-            if(!window.firebaseAuth){if(error)error.textContent='خدمة تسجيل الدخول غير جاهزة.';return;}
+            if(!window.firebaseAuth){if(error)error.textContent='خدمة تسجيل الدخول غير جاهزة. أعد تحميل الصفحة.';return;}
             const button=document.getElementById('googleLoginButton');
             if(button){button.disabled=true;button.innerHTML='<i class="fas fa-spinner fa-spin me-2"></i> جارٍ فتح Google...';}
             try{
                 const provider=new firebase.auth.GoogleAuthProvider();
                 provider.setCustomParameters({prompt:'select_account'});
-                const credential=await window.firebaseAuth.signInWithPopup(provider);
-                if(!window.remoteDataLoaded){if(error)error.textContent='تم التحقق من Google لكن بيانات النظام لم تُحمّل بعد. أعد المحاولة.';await window.firebaseAuth.signOut();return;}
+                let credential;
+                try{
+                    credential=await window.firebaseAuth.signInWithPopup(provider);
+                }catch(popupError){
+                    if(['auth/popup-blocked','auth/operation-not-supported-in-this-environment'].includes(popupError.code)){
+                        await window.firebaseAuth.signInWithRedirect(provider);
+                        return;
+                    }
+                    throw popupError;
+                }
+                const loaded=await waitForRemoteData();
+                if(!loaded){
+                    if(error)error.textContent='تم تسجيل الدخول إلى Google، لكن لم يتم تحميل بيانات Firestore. راجع قواعد Firestore ثم أعد المحاولة.';
+                    return;
+                }
                 const found=resolveFirebaseAppUser(credential.user);
                 if(!found){
-                    if(error)error.textContent='تم تسجيل Gmail بنجاح، لكن البريد غير مربوط بمستخدم وصلاحية داخل النظام. يجب أن يطابق الجزء قبل @ اسم المستخدم، أو نضيف بريدك إلى سجل المستخدم.';
+                    if(error)error.textContent='تم تسجيل Gmail بنجاح، لكن البريد غير مربوط بمستخدم داخل البرنامج. أضف البريد إلى سجل المستخدمين.';
                     await window.firebaseAuth.signOut();return;
                 }
                 showAuthenticatedUser(found,false);
@@ -4284,14 +4320,29 @@
                 const code=String(err&&err.code||'');
                 let message='تعذر تسجيل الدخول باستخدام Google.';
                 if(code.includes('auth/operation-not-allowed'))message='يجب تفعيل مزود Google من Firebase Authentication.';
-                else if(code.includes('auth/unauthorized-domain'))message='يجب إضافة نطاق الموقع إلى Authorized domains في Firebase Authentication.';
-                else if(code.includes('auth/popup-blocked'))message='المتصفح منع النافذة المنبثقة. اسمح بالنوافذ المنبثقة للموقع ثم حاول مجدداً.';
+                else if(code.includes('auth/unauthorized-domain'))message='أضف نطاق الموقع إلى Authorized domains في Firebase Authentication.';
+                else if(code.includes('auth/popup-blocked'))message='المتصفح منع نافذة Google. اسمح بالنوافذ المنبثقة أو استخدم متصفحاً آخر.';
                 else if(code.includes('auth/popup-closed-by-user'))message='تم إغلاق نافذة Google قبل إكمال تسجيل الدخول.';
+                else if(code.includes('auth/account-exists-with-different-credential'))message='هذا البريد مسجل بطريقة دخول أخرى في Firebase. استخدم طريقة الدخول المرتبطة به.';
                 if(error)error.textContent=message;
             }finally{
-                if(button){button.disabled=!window.remoteDataLoaded;button.innerHTML='<i class="fab fa-google me-2"></i> الدخول باستخدام Google';}
+                if(button){button.disabled=!window.firebaseAuth;button.innerHTML='<i class="fab fa-google me-2"></i> الدخول باستخدام Google';}
             }
         }
+        // Complete Google redirect sign-in on browsers that cannot open popups.
+        document.addEventListener('DOMContentLoaded',async()=>{
+            try{
+                if(window.firebaseAuth&&window.firebaseAuth.getRedirectResult){
+                    const result=await window.firebaseAuth.getRedirectResult();
+                    if(result&&result.user){
+                        await waitForRemoteData();
+                        const mapped=resolveFirebaseAppUser(result.user);
+                        if(mapped)showAuthenticatedUser(mapped,false);
+                        else {const e=document.getElementById('loginError');if(e)e.textContent='تم تسجيل Google لكن البريد غير مربوط بمستخدم داخل البرنامج.';}
+                    }
+                }
+            }catch(e){console.warn('Google redirect result:',e);}
+        });
         async function logout(){
             if(currentUser)addAudit('تسجيل خروج','مستخدم',currentUser.username);
             saveState();clearTabSession();currentUser=null;
